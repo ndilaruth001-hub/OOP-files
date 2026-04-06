@@ -1,0 +1,65 @@
+class BankAccount:
+    def __init__(self, acc_num, holder, initial_balance):
+        # Private attributes
+        self.__account_number = acc_num
+        self.__account_holder = holder
+        self.__balance = 0
+
+        # Use deposit to validate initial balance
+        self.deposit(initial_balance)
+
+    # Read-only property for account number
+    @property
+    def account_number(self):
+        return self.__account_number
+
+    # Getter for balance
+    @property
+    def balance(self):
+        return self.__balance
+
+    # Setter for balance with validation
+    @balance.setter
+    def balance(self, amount):
+        if amount < 0:
+            print("Balance cannot be negative.")
+        else:
+            self.__balance = amount
+
+    # Deposit method
+    def deposit(self, amount):
+        if amount <= 0:
+            print("Deposit amount must be positive.")
+        else:
+            self.__balance += amount
+            print(f"Deposited: {amount}")
+
+    # Withdraw method
+    def withdraw(self, amount):
+        if amount <= 0:
+            print("Withdrawal amount must be positive.")
+        elif amount > self.__balance:
+            print("Insufficient balance.")
+        else:
+            self.__balance -= amount
+            print(f"Withdrawn: {amount}")
+
+    # Display account info
+    def display_account_info(self):
+        print("Account Number:", self.__account_number)
+        print("Account Holder:", self.__account_holder)
+        print("Balance:", self.__balance)
+        # Create account
+acc1 = BankAccount("65432", "Ruth", 1000)
+
+# Test deposit
+acc1.deposit(500)
+
+# Test withdrawal
+acc1.withdraw(200)
+
+# Test invalid withdrawal
+acc1.withdraw(2000)
+
+# Display details
+acc1.display_account_info()
